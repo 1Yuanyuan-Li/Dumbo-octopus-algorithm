@@ -1,3 +1,4 @@
+
 %___________________________________________________________________%
 %  Dumbo Octopus Algorithm source codes version 1.0                 %
 %                                                                   %
@@ -10,8 +11,8 @@
 %                                                                   %
 %       Homepage:                                                   %
 %                                                                   %
-%   Main paper: Yuanyuan Li; Lei Ni; Guoqiang Chen;                 %
-%               Lanqiang Zhang; Dongmei Zhao; Geng Wang;            %
+%   Main paper: Yuanyuan Li; Lei Ni;                                %
+%               Lanqiang Zhang; Sumeet S. Aphale; Geng Wang;        %
 %               Dumbo Octopus Algorithm:                            %
 %               global optimization problems                        %
 %   DOI:                                                            %
