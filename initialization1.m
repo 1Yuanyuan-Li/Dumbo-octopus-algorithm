@@ -10,56 +10,30 @@
 %                                                                   %
 %       Homepage:                                                   %
 %                                                                   %
-%   Main paper: Yuanyuan Li; Lei Ni; Guoqiang Chen;                 %
-%               Lanqiang Zhang; Dongmei Zhao; Geng Wang;            %
+%   Main paper: Yuanyuan Li; Lei Ni;                                %
+%               Lanqiang Zhang; Sumeet S. Aphale; Geng Wang;        %
 %               Dumbo Octopus Algorithm:                            %
 %               global optimization problems                        %
 %   DOI:                                                            %
 %___________________________________________________________________%
-
+;
 % This function initialize the first population of search agents
-function Positions=initialization1(SearchAgents_no,dim,ub,lb,F_obj)
+function Positions=initialization(SearchAgents_no,dim,ub,lb)
 
-X_train = rand(SearchAgents_no,dim).*(ub-lb)+lb;
+Boundary_no= size(ub,2); % numnber of boundaries
 
-y_train=rand(SearchAgents_no,dim).*(ub-lb)+lb;
+% If the boundaries of all variables are equal and user enter a signle
+% number for both ub and lb
+if Boundary_no==1
+    Positions=rand(SearchAgents_no,dim).*(ub-lb)+lb;
+end
 
-  net = feedforwardnet(10); % 使用10个隐藏层神经元
-
-net.trainParam.showWindow = false;
-
- net = train(net, X_train, y_train);
-
-% 使用训练好的神经网络模型生成初始解
-input_features =rand(SearchAgents_no,dim).*(ub-lb)+lb;
-
-Positions_NN = net(input_features);
-
-%% 传统方法
-
+% If each variable has a different lb and ub
+if Boundary_no>1
     for i=1:dim
-
-        Positions_X=rand(SearchAgents_no,dim).*(ub-lb)+lb;
-
+        ub_i=ub(i);
+        lb_i=lb(i);
+        Positions(:,i)=rand(SearchAgents_no,1).*(ub_i-lb_i)+lb_i;
     end
-
- for i=1:SearchAgents_no  
-     
-        Fit_NN(i,:)=F_obj(Positions_NN(i,:));
-
-        Fit_X(i,:)=F_obj(Positions_X(i,:));
-
-if Fit_NN(i)<Fit_X(i)
-
-Positions(i,:)=Positions_NN(i,:);
-
-else
-
-Positions(i,:)=Positions_X(i,:);
-
-
- end
-
- end
 
 end
